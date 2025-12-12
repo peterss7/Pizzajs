@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import useDrawCanvas from "./useDrawCanvas";
-import { Canvas } from "./CanvasStyles";
-import { AnnexTextInput } from "../../components/inputs/AnnexTextInputStyles";
-// import useMouse from "../hooks/useMouse";
+import TextInputContainer from "../../forms/inputs/TextInputContainer";
+import useDrawCanvas from "../../../hooks/useDrawCanvas";
+import PZButton from "../../forms/buttons/PZButton";
+import PzButtonBarContainer from "../../forms/buttons/PzButtonBarContainer";
 
 export type Coords = {
     x: number;
@@ -22,11 +22,6 @@ export default function GameCanvas() {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    function onChangeInput(e: React.ChangeEvent<HTMLInputElement>){
-        console.log(`val: ${e.target.value}`);
-        setInputValue(e.target.value);
-    }
-
     function onClick(e: React.MouseEvent) {
         const canvas = canvasRef.current;
 
@@ -39,6 +34,14 @@ export default function GameCanvas() {
         const scaleY = canvas.height / rect.height;
 
         setCoords({ x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY });
+    }
+
+    function onSubmitInput(){
+        console.log(`hit submit`);
+    }
+
+    function onCancelInput(){
+        console.log(`hit cancel`);
     }
 
     useEffect(() => {
@@ -80,16 +83,31 @@ export default function GameCanvas() {
 
     return (
         <div>
-            <Canvas
+            <canvas
                 ref={canvasRef}
                 onClick={onClick}
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block",
+                    background: "#000",
+                }}
             />
-            
-            <AnnexTextInput 
-                value={inputValue}
-                onChange={onChangeInput}
-                onSubmit={() => console.log(`text: ${inputValue}`)}
-            />
+            <div>
+                <TextInputContainer
+                    value={inputValue}
+                    onChange={setInputValue}
+                    elementLocation={{
+                        left: 325,
+                        bottom: 350,
+                        width: 150
+                    }}
+                />
+                <PzButtonBarContainer />
+            </div>            
         </div>
     )
 }
