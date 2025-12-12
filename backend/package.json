@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-    "scripts": {
+  "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "db:init": "psql \"$DATABASE_URL\" -f /db/init.sql"
+    "db:init": "node ./scripts/init-db.mjs"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +23,9 @@
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/node": "^25.0.0",
+    "@types/node": "^25.0.1",
     "@types/pg": "^8.16.0",
+    "cross-env": "^10.1.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }

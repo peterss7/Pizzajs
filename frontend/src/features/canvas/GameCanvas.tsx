@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import useDrawCanvas from "../hooks/useDrawCanvas";
-import { Canvas } from "../styles/CanvasStyles";
-import { color } from "@mui/system";
+import useDrawCanvas from "./useDrawCanvas";
+import { Canvas } from "./CanvasStyles";
+import { AnnexTextInput } from "../../components/inputs/AnnexTextInputStyles";
 // import useMouse from "../hooks/useMouse";
 
 export type Coords = {
@@ -9,7 +9,7 @@ export type Coords = {
     y: number;
 }
 
-const INITIAL_COORDS: Coords = {x: 0, y: 0};
+const INITIAL_COORDS: Coords = { x: 0, y: 0 };
 
 export default function GameCanvas() {
 
@@ -17,11 +17,20 @@ export default function GameCanvas() {
     const [height, setHeight] = useState<number>(window.innerHeight);
     const [coords, setCoords] = useState<Coords>(INITIAL_COORDS);
     const { drawBackground } = useDrawCanvas();
-    
+
+    const [inputValue, setInputValue] = useState<string>("");
+
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    function onClick(e: React.MouseEvent){
+    function onChangeInput(e: React.ChangeEvent<HTMLInputElement>){
+        console.log(`val: ${e.target.value}`);
+        setInputValue(e.target.value);
+    }
+
+    function onClick(e: React.MouseEvent) {
         const canvas = canvasRef.current;
+
+        console.log(`input val: ${inputValue}`);
 
         if (!canvas) return;
 
@@ -29,7 +38,7 @@ export default function GameCanvas() {
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
 
-        setCoords({x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY});
+        setCoords({ x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY });
     }
 
     useEffect(() => {
@@ -62,19 +71,25 @@ export default function GameCanvas() {
 
         ctx.fillStyle = "#333";
         ctx.strokeStyle = "#fff";
-        ctx.fillRect(30,30,70,70);
-        ctx.strokeRect(50,50,40,40);
-        ctx.fillStyle="#fff";
+        ctx.fillRect(30, 30, 70, 70);
+        ctx.strokeRect(50, 50, 40, 40);
+        ctx.fillStyle = "#fff";
         ctx.fillText(`(${coords.x}, ${coords.y})`, 40, 40);
 
     }, [width, height, coords.x, coords.y]);
 
     return (
-        <>
+        <div>
             <Canvas
                 ref={canvasRef}
                 onClick={onClick}
             />
-        </>
+            
+            <AnnexTextInput 
+                value={inputValue}
+                onChange={onChangeInput}
+                onSubmit={() => console.log(`text: ${inputValue}`)}
+            />
+        </div>
     )
 }
