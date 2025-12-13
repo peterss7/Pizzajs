@@ -1,13 +1,7 @@
+import type { AccountDto } from "../../../shared/types/DtoTypes";
+import type { ElementType } from "../../../shared/types/ElementTypes";
 
 export type PzButtonProps = {
-    left?: number;
-    right?: number;
-    top?: number;
-    bottom?: number;
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
     value?: string;
     boxShadow?: string;
     textColor?: string;
@@ -15,8 +9,8 @@ export type PzButtonProps = {
     bgColor?: string;
     fontSize?: string;
     offsetX?: number;
-    onClick?: () => void;
-}
+    onClick?: (() => void) | ((val: AccountDto) => void);
+} & ElementType
 
 
 export type PzButtonBarProps = {
@@ -24,4 +18,5 @@ export type PzButtonBarProps = {
     spacingY?: number;
     flexDirection?: "row" | "column";
     buttonsProps: PzButtonProps[];
+    canvasRef?: React.RefObject<HTMLCanvasElement | null>;
 }

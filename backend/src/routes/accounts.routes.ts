@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import { pool } from "../../db/db";
+import { Request, Response, Router } from "express";
+import { pool } from "../db/db";
 
-export default async function createAccount(req: Request, res: Response) {
+const accountRouter = Router();
+
+accountRouter.post("/", async (req: Request, res: Response) => {
     try{
         const { name } = req.body as {
             name?: string;
@@ -11,19 +12,6 @@ export default async function createAccount(req: Request, res: Response) {
         if (!name) {
             return res.status(400).json({error: "name required."});
         }
-
-        console.log("name", name);
-
-        // if (!email.includes("@")){
-        //     // TO-DO use regex
-        //     return res.status(400).json({error: "Invalid email."});
-        // }
-
-        // if (password.length < 6) {
-        //     return res.status(400).json({error: "Password requires at least 6 characers."});
-        // }
-
-        // const passwordHash = await bcrypt.hash(password, 10);
 
         const result = await pool.query(
             `INSERT INTO accounts (name)
@@ -46,5 +34,21 @@ export default async function createAccount(req: Request, res: Response) {
 
         return res.status(500).json({ error: "Internal server error."});
     }
-}
+});
 
+accountRouter.get("/", async(req: Request, res: Response) => {
+    try{
+        const result = await pool.query(
+            `SELECT id, name
+            FROM accounts
+            ORDER BY id DESC`
+        );
+
+        return res.json(result.rows);
+    } catch(error: any){
+        console.error("Error fetching accounts: ", error);
+        return res.status(500).json({error: "Internal server error..."});
+    }
+});
+
+export default accountRouter;

@@ -1,8 +1,8 @@
-export type ElementLocationType = {
+export type ElementType = {
     x?: number;
     y?: number;
     left?: number;
-    bottom?: number;
+    top?: number;
     width?: number;
     height?: number;
 }

@@ -12,5 +12,5 @@
     "sourceMap": true,
     "skipLibCheck": true
   },
-  "include": ["src", "db"],
+  "include": ["src", "src/db"],
 }

@@ -1,8 +1,8 @@
 ﻿import "dotenv/config";
 import express, { Request, Response } from "express";
-import createAccount from "./routes/accounts"
 import cors from "cors";
 import { Pool } from "pg";
+import accountRoutes from "./routes/accounts.routes";
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 3000);
@@ -21,7 +21,7 @@ app.get("/api/hello", (req: Request, res: Response) => {
   res.json({ message: "Hello from backend!", time: new Date().toISOString() });
 });
 
-app.post("/api/accounts", createAccount);
+app.use("/api/accounts", accountRoutes);
 
 app.listen(PORT, () => {
   console.log(`Backend listening on http://localhost:${PORT}`);

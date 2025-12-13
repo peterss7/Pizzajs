@@ -1,0 +1,13 @@
+  // ctx.fillStyle = "#000";
+          // const cellWidth = width / 10;
+        // const cellHeight = height / 10;
+        
+        // ctx.fillRect((width / 10) * 2.5, (height / 10) * 2, (width / 10) * 3.25, (height / 10) * 3);
+
+        // ctx.fillStyle = "#0A0";
+        // // ctx.strokeRect(cellWidth * 2.5, cellHeight * 2.5, cellWidth * 4, cellHeight * 1);
+        // ctx.fillStyle = "#909";
+        // ctx.font = "24px sans-serif";          // 👈 text size here
+        // ctx.textAlign = "center";               // optional: center in the box
+        // ctx.textBaseline = "middle";
+        // ctx.fillText("Hello, kindly fill out form...", cellWidth * 4, cellHeight * 2.66);

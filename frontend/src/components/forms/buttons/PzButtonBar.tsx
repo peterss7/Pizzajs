@@ -1,9 +1,14 @@
-import PZButton from "./PZButton"
+import { useEffect } from "react";
 import type { PzButtonBarProps } from "./PzButtonTypes"
+import PzButton from "./PzButton";
 
 
 export default function PzButtonBar(props: PzButtonBarProps) {
     const { buttonsProps, spacingX, flexDirection } = props;
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <div
@@ -13,12 +18,11 @@ export default function PzButtonBar(props: PzButtonBarProps) {
                 gap: spacingX
             }}
         >
-            <PZButton
-                {...buttonsProps[0]}
-            />
-            <PZButton
-                {...buttonsProps[1]}
-            />
+            <>
+                {buttonsProps.map((x, i) => (
+                    <PzButton key={i} {...x} />
+                ))}
+            </>
         </div>
     )
 }

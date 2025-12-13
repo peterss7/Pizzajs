@@ -1,0 +1,32 @@
+
+// export type Coords = {
+//     x: number;
+//     y: number;
+// }
+
+// const INITIAL_COORDS: Coords = { x: 0, y: 0 };
+
+    // const [coords, setCoords] = useState<Coords>(INITIAL_COORDS);
+
+
+ // function onClick(e: React.MouseEvent) {
+    //     const canvas = canvasRef.current;
+
+    //     if (!canvas) return;
+
+    //     const rect = canvas.getBoundingClientRect();
+    //     const scaleX = canvas.width / rect.width;
+    //     const scaleY = canvas.height / rect.height;
+
+    //     setCoords({ x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY });
+    // }
+
+    // function onSubmit(){
+    //     // setNewAccount();
+    //     console.log("newName", newName);
+    // }
+
+    // function onCancel() {
+    //     setNewName("");
+    //     accounts.forEach((x: AccountDto) => console.log("name", x.name));
+    // }

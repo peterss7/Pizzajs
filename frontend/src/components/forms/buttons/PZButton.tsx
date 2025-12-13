@@ -2,7 +2,7 @@ import { BOX_SHADOW, BUTTON_BG_COLOR, BUTTON_BORDER, BUTTON_FONT_SIZE, BUTTON_HE
 import type { PzButtonProps } from "./PzButtonTypes";
 
 
-export default function PZButton(props: PzButtonProps) {
+export default function PzButton(props: PzButtonProps) {
     const { 
         onClick, 
         value, 
