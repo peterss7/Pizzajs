@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import TextInputContainer from "../../forms/inputs/TextInputContainer";
 import useDrawCanvas from "../../../hooks/useDrawCanvas";
-import PZButton from "../../forms/buttons/PZButton";
-import PzButtonBarContainer from "../../forms/buttons/PzButtonBarContainer";
+import PzButtonBar from "../../forms/buttons/PzButtonBar";
 
 export type Coords = {
     x: number;
@@ -11,7 +10,7 @@ export type Coords = {
 
 const INITIAL_COORDS: Coords = { x: 0, y: 0 };
 
-export default function GameCanvas() {
+export default function PzCanvas() {
 
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [height, setHeight] = useState<number>(window.innerHeight);
@@ -36,11 +35,11 @@ export default function GameCanvas() {
         setCoords({ x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY });
     }
 
-    function onSubmitInput(){
+    function onSubmit() {
         console.log(`hit submit`);
     }
 
-    function onCancelInput(){
+    function onCancel() {
         console.log(`hit cancel`);
     }
 
@@ -67,17 +66,27 @@ export default function GameCanvas() {
 
         canvas.width = width;
         canvas.height = height;
+        const cellWidth = width / 10;
+        const cellHeight = height / 10;
 
         console.log(`(${coords.x}, ${coords.y})`);
 
         drawBackground(ctx, width, height);
 
-        ctx.fillStyle = "#333";
-        ctx.strokeStyle = "#fff";
-        ctx.fillRect(30, 30, 70, 70);
-        ctx.strokeRect(50, 50, 40, 40);
-        ctx.fillStyle = "#fff";
-        ctx.fillText(`(${coords.x}, ${coords.y})`, 40, 40);
+        ctx.fillStyle = "#000";
+        ctx.fillRect((width / 10) * 2, (height / 10) * 2, (width / 10) * 5, (height / 10) * 3);
+
+        
+        
+        ctx.fillStyle = "#0A0";
+        ctx.strokeRect(cellWidth*2.5, cellHeight * 2.5, cellWidth * 4, cellHeight * 1);
+        ctx.fillStyle = "#909";
+        ctx.font = "24px sans-serif";          // 👈 text size here
+        ctx.textAlign = "center";               // optional: center in the box
+        ctx.textBaseline = "middle";
+        ctx.fillText("Hello", cellWidth * 3, cellHeight * 2.66);
+
+
 
     }, [width, height, coords.x, coords.y]);
 
@@ -97,17 +106,22 @@ export default function GameCanvas() {
                 }}
             />
             <div>
-                <TextInputContainer
-                    value={inputValue}
-                    onChange={setInputValue}
-                    elementLocation={{
-                        left: 325,
-                        bottom: 350,
-                        width: 150
-                    }}
-                />
-                <PzButtonBarContainer />
-            </div>            
+                <PzButtonBar
+                    buttonsProps={[
+                        {
+                            left: (width / 10) * 3,
+                            top: (height / 10) * 4,
+                            value: "Cancel",
+                            onClick: onCancel
+                        },
+                        {
+                            left: (width / 10) * 5,
+                            top: (height / 10) * 4,
+                            value: "Submit",
+                            onClick: onSubmit
+                        }
+                    ]} />
+            </div>
         </div>
     )
 }

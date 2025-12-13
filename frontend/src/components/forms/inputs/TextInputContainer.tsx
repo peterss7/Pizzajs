@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import TextInputView from "./TextInputView";
-import type { ElementLocationType } from "../../shared/types/ElementLocationTypes";
+import type { ElementLocationType } from "../../shared/ElementLocationTypes";
 
 type TextInputContainerProps = {
     value: string;

@@ -1,4 +1,4 @@
-import type { ElementLocationType } from "../../shared/types/ElementLocationTypes";
+import type { ElementLocationType } from "../../shared/ElementLocationTypes";
 
 type TextInputViewProps = {
     inputRef: React.RefObject<HTMLInputElement | null>;

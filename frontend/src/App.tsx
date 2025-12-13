@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import GameCanvas from './components/core/GameCanvas/GameCanvas'
+import PzCanvas from './components/core/PzCanvas/PzCanvas'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <GameCanvas />
+      <PzCanvas />
     </>
   )
 }
