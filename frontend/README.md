@@ -71,3 +71,27 @@ export default defineConfig([
   },
 ])
 ```
+## File structure
+```txt
+src/
+├── assets/ # Images, fonts, static files
+├── components/ # Reusable UI components
+│ ├── ui/ # Atomic base components (Button, Input)
+│ └── shared/ # Shared higher-order components
+├── features/ # Feature-specific modules (by domain)
+│ └── auth/
+│ ├── components/
+│ ├── hooks/
+│ ├── services/
+│ └── AuthPage.tsx
+├── hooks/ # Global reusable custom hooks
+├── lib/ # Utilities, API clients, helpers
+├── pages/ # Routes (if using Next.js or React Router)
+├── store/ # Zustand / Redux / Context files
+├── styles/ # Global styles, Tailwind config
+├── types/ # Global TypeScript types & interfaces
+├── constants/ # App-wide enums, config values
+├── layouts/ # Page/layout wrappers
+├── tests/ # Global testing utilities/mocks
+└── App.tsx / index.tsx
+```
