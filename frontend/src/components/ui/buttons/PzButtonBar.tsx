@@ -1,7 +1,14 @@
 import { useEffect } from "react";
-import type { PzButtonBarProps } from "./PzButtonTypes"
-import PzButton from "./PzButton";
+import PzButton, { type PzButtonProps } from "./PzButton";
 
+
+export type PzButtonBarProps = {
+    spacingX?: number;
+    spacingY?: number;
+    flexDirection?: "row" | "column";
+    buttonsProps: PzButtonProps[];
+    canvasRef?: React.RefObject<HTMLCanvasElement | null>;
+}
 
 export default function PzButtonBar(props: PzButtonBarProps) {
     const { buttonsProps, spacingX, flexDirection } = props;

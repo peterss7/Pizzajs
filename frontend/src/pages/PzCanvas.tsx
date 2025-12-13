@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import useDrawCanvas from "../../../hooks/useDrawCanvas";
-import AccountCreateForm from "../Accounts/AccountCreateForm";
-import useDrawAccounts from "../../../hooks/useDrawAccountCreateForm";
+import AccountCreateForm from "../features/accounts/AccountCreateForm";
+import useDrawAccounts from "../hooks/useDrawAccountCreateForm";
+import useDrawCanvas from "../hooks/useDrawCanvas";
 
 
 export default function PzCanvas() {

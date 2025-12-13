@@ -10,4 +10,3 @@ export const BUTTON_BORDER = "2px solid #225";
 export const BUTTON_FONT_SIZE = "12";
 export const BUTTON_SPACING_X = 0;
 export const BUTTON_ON_CLICK = () => console.log("Click!");
-// export const 

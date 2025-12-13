@@ -1,4 +1,4 @@
-export type ElementType = {
+export type HtmlElement = {
     x?: number;
     y?: number;
     left?: number;

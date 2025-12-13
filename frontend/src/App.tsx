@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import PzCanvas from './components/core/PzCanvas/PzCanvas'
-import { AccountProvider } from './context/useAccountContext'
+import { AccountProvider } from './store/useAccountContext'
+import PzCanvas from './pages/PzCanvas'
 
 function App() {
   const [count, setCount] = useState(0)

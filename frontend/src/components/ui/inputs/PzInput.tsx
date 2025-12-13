@@ -1,9 +1,17 @@
 import { useRef } from "react";
-import type { PzTextInputProps } from "./PzTextInputTypes";
-import { INPUT_HEIGHT, INPUT_LEFT, INPUT_PLACEHOLDER, INPUT_TOP, INPUT_VALUE, INPUT_WIDTH } from "./PzInputConstants";
+import type { HtmlElement } from "../../../types/HtmlElement";
+import { INPUT_VALUE, INPUT_PLACEHOLDER, INPUT_TOP, INPUT_LEFT, INPUT_WIDTH, INPUT_HEIGHT } from "../../../constants/INPUT_DEFAULTS";
 
 
-export default function PzTextInput(props: PzTextInputProps) {
+export type PzInputProps = {
+    value?: string;
+    onChange?: (value: string) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    label?: string;
+    placeholder?: string;
+} & HtmlElement
+
+export default function PzInput(props: PzInputProps) {
     const { 
         value, 
         onChange, 

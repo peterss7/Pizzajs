@@ -1,8 +1,12 @@
 // src/features/account/api/useAccountApi.ts
 import { useCallback, useState } from "react";
 import { BASE_URL } from "./ApiConstants";
-import type { CreateAccountRequest } from "./AdapterTypes";
-import type { AccountDto } from "../shared/types/DtoTypes";
+import type { AccountDto } from "../types/AccountDto";
+
+
+export type CreateAccountRequest = {
+    name?: string;
+};
 
 export function useAccountApi() {
     const [isLoading, setIsLoading] = useState(false);

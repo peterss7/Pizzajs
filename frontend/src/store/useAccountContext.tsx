@@ -1,6 +1,7 @@
 import { createContext, type ReactNode, useState, useEffect, useContext, type SetStateAction } from "react";
-import { useAccountApi } from "../adapters/useAccountApi";
-import type { AccountDto } from "../shared/types/DtoTypes";
+import { useAccountApi, type CreateAccountRequest } from "../lib/useAccountApi";
+import type { AccountDto } from "../types/AccountDto";
+
 
 type AccountContextValue = {
     newAccount: AccountDto;
@@ -8,7 +9,7 @@ type AccountContextValue = {
     newName: string;
     setNewName: (value: string) => void;
     accounts: AccountDto[];
-    createAccount: (account: AccountDto) => Promise<void>;
+    createAccount: () => Promise<void>;
 }
 
 const AccountContext = createContext<AccountContextValue | undefined>(undefined);
@@ -19,7 +20,7 @@ type AccountProviderProps = {
 
 const INITIAL_ACCOUNT: AccountDto = {
     id: "0",
-    name: ""
+    name: "Anonymous"
 }
 
 export function AccountProvider({
@@ -32,17 +33,22 @@ export function AccountProvider({
     const { getAccounts, postAccount } = useAccountApi();
 
     const createAccount = async () => {
-        setNewAccount((prevState) => ({ ...prevState, name: newName}));
-        console.log("new account", newAccount);
-        await postAccount(newAccount);
-        setNewName("");
-        accounts.push(newAccount);
+        // console.log("new account", newAccount?.name);
+        console.log("new name", newName);
+        await postAccount({ name: newName }).then((createdAccount) => {
+            if (createdAccount) {
+                console.log("created account", createdAccount);
+                setNewName("");
+                accounts.push({ ...createdAccount });
+            }
+        });
+
         accounts.forEach(x => console.log("name", x.name));
     }
 
     useEffect(() => {
         (async () => {
-            const currentAccounts = await getAccounts();            
+            const currentAccounts = await getAccounts();
             setAccounts(currentAccounts ?? [])
         })();
     }, [getAccounts]);
