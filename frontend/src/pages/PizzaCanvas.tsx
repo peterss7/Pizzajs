@@ -2,15 +2,20 @@ import { useEffect, useRef, useState } from "react"
 import AccountCreateForm from "../features/accounts/AccountCreateForm";
 import useDrawAccounts from "../hooks/useDrawAccountCreateForm";
 import useDrawCanvas from "../hooks/useDrawCanvas";
+import { useAccountContext } from "../stores/useAccountContext";
+import PzButton from "../components/ui/buttons/PzButton";
 
 
-export default function PzCanvas() {
+export default function PizzaCanvas() {
 
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [height, setHeight] = useState<number>(window.innerHeight);
+    const cellWidth: number = window.innerWidth / 10;
+    const cellHeight: number = window.innerHeight / 10;
 
     const { drawBackground } = useDrawCanvas();
     const { drawCreateAccountForm } = useDrawAccounts();
+    const { isCreateOpen: isCreateAccountOpen, setIsCreateOpen: setIsCreateAccountOpen } = useAccountContext();
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -37,11 +42,16 @@ export default function PzCanvas() {
 
         canvas.width = width;
         canvas.height = height;
-        
-        drawBackground(ctx, width, height);
-        drawCreateAccountForm(ctx, width, height);
 
-    }, [width, height]);
+        drawBackground(ctx, width, height);
+
+        if (isCreateAccountOpen) {
+            console.log("draw account form");
+            drawCreateAccountForm(ctx, width, height);
+        }
+
+
+    }, [width, height, isCreateAccountOpen]);
 
     return (
         <div>
@@ -60,8 +70,16 @@ export default function PzCanvas() {
             <AccountCreateForm
                 width={width}
                 height={height}
-                canvasRef={canvasRef}
             />
+            {!isCreateAccountOpen &&
+                <PzButton
+                    value={"Sign up!"}
+                    bgColor={"#441c06ff"}
+                    textColor={"#fff"}
+                    onClick={() => setIsCreateAccountOpen(true)}
+                    left={cellWidth * 8.5}
+                    top={cellHeight}
+                />}
         </div >
     )
 }

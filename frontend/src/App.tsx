@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { AccountProvider } from './store/useAccountContext'
-import PzCanvas from './pages/PzCanvas'
+import { AccountProvider } from './stores/useAccountContext'
+import PizzaCanvas from './pages/PizzaCanvas'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <AccountProvider>
-        <PzCanvas />
+        <PizzaCanvas />
       </AccountProvider>
     </>
   )

@@ -5,7 +5,7 @@ export default function useDrawCanvas() {
 
     function drawBackground(ctx: CanvasRenderingContext2D, width: number, height: number) {
         ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = "#888";
+        ctx.fillStyle = "rgb(40, 1, 2)";
         ctx.fillRect(0, 0, width, height);
 
         drawGrid(ctx, width, height)
