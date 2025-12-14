@@ -1,4 +1,4 @@
 export type AccountDto = {
     id: string;
-    name?: string;
+    name: string;
 };

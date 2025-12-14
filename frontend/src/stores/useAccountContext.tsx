@@ -1,6 +1,7 @@
 import { createContext, type ReactNode, useState, useEffect, useContext, type SetStateAction } from "react";
-import { useAccountApi, type CreateAccountRequest } from "../lib/useAccountApi";
+import { useAccountApi, type CreateAccountRequest,  } from "../lib/useAccountApi";
 import type { AccountDto } from "../types/AccountDto";
+import useKeys from "../lib/useKeys";
 
 
 type AccountContextValue = {
@@ -20,9 +21,9 @@ type AccountProviderProps = {
     children: ReactNode;
 }
 
-const INITIAL_ACCOUNT: AccountDto = {
+export const INITIAL_ACCOUNT: AccountDto = {
     id: "0",
-    name: "Anonymous"
+    name: ""
 }
 
 export function AccountProvider({
@@ -34,13 +35,14 @@ export function AccountProvider({
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
 
     const { getAccounts, postAccount } = useAccountApi();
+    const  keys = useKeys();
 
     const createAccount = async () => {
 
-        await postAccount({ name: newName }).then((createdAccount) => {
+        await postAccount(newAccount as CreateAccountRequest).then((createdAccount) => {
             if (createdAccount) {
                 console.log("created account", createdAccount);
-                setNewName("");
+                setNewAccount(INITIAL_ACCOUNT);
                 accounts.push({ ...createdAccount });
                 setIsCreateOpen(false);
             }
@@ -55,6 +57,8 @@ export function AccountProvider({
             setAccounts(currentAccounts ?? [])
         })();
     }, [getAccounts]);
+
+   
 
     const contextValue = {
         newAccount,

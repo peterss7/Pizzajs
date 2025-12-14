@@ -5,7 +5,7 @@ import type { AccountDto } from "../types/AccountDto";
 
 
 export type CreateAccountRequest = {
-    name?: string;
+    name: string;
 };
 
 export function useAccountApi() {
