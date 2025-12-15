@@ -30,7 +30,6 @@ export default function PizzaCanvas() {
         return () => {
             window.removeEventListener("resize", handleResize)
         }
-
     }, []);
 
     useEffect(() => {
@@ -49,8 +48,6 @@ export default function PizzaCanvas() {
             console.log("draw account form");
             drawCreateAccountForm(ctx, width, height);
         }
-
-
     }, [width, height, isCreateAccountOpen]);
 
     return (
@@ -67,19 +64,31 @@ export default function PizzaCanvas() {
                     background: "#0f0",
                 }}
             />
-            <AccountCreateForm
+            {/* <AccountCreateForm
                 width={width}
                 height={height}
-            />
-            {!isCreateAccountOpen &&
-                <PzButton
-                    value={"Sign up!"}
-                    bgColor={"#441c06ff"}
-                    textColor={"#fff"}
-                    onClick={() => setIsCreateAccountOpen(true)}
-                    left={cellWidth * 8.5}
-                    top={cellHeight}
-                />}
+            /> */}
+            {/* {!isAuthenticated &&
+                <>
+                    <PzButton
+                        value={"Login"}
+                        bgColor={"#441c06ff"}
+                        textColor={"#fff"}
+                        // onClick={() => login()}
+                    />
+                    {!isCreateAccountOpen &&
+                        <PzButton
+                            value={"Sign up!"}
+                            bgColor={"#441c06ff"}
+                            textColor={"#fff"}
+                            onClick={() => setIsCreateAccountOpen(true)}
+                            left={cellWidth * 8.5}
+                            top={cellHeight}
+                        />}
+
+                </>
+            } */}
+
         </div >
     )
 }

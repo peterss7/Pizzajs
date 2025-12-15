@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import PzButtonBar from "../../components/ui/buttons/PzButtonBar";
 import PzInput from "../../components/ui/inputs/PzInput";
 import { INITIAL_ACCOUNT, useAccountContext } from "../../stores/useAccountContext";
-import type { AccountDto } from "../../types/AccountDto";
-import useKeys from "../../lib/useKeys";
+import useKeys from "../../hooks/useKeys";
 
 type AccountCreateFormProps = {
     width: number;
@@ -16,7 +15,6 @@ export default function AccountCreateForm(props: AccountCreateFormProps) {
         setNewAccount,
         createAccount,
         isCreateOpen,
-        setIsCreateOpen
     } = useAccountContext();
 
     const { width, height } = props;
@@ -28,12 +26,11 @@ export default function AccountCreateForm(props: AccountCreateFormProps) {
 
     function onCancel() {
         setNewAccount(INITIAL_ACCOUNT);
-        setIsCreateOpen(false);
     }
 
     useEffect(() => {
         console.log(`key hit`);
-        if (keys?.enter) {
+        if (keys?.enter && isCreateOpen) {
             if (newAccount.name) {
                 createAccount();
             }
@@ -57,16 +54,16 @@ export default function AccountCreateForm(props: AccountCreateFormProps) {
                             left={(width / 10) * 3}
                             width={150}
                             height={15}
-                            placeholder={"Enter username"}
+                            placeholder={"Enter username..."}
                         />
                         <PzInput
-                            value={newAccount.name}
-                            // onChange={(value: string) => setNewAccount((prevState) => ({ ...prevState, name: value }))}
+                            value={newAccount.password}
+                            onChange={(value: string) => setNewAccount((prevState) => ({ ...prevState, password: value }))}
                             top={(height / 10) * 3.75}
                             left={(width / 10) * 3}
                             width={150}
                             height={15}
-                            placeholder={"Enter password"}
+                            placeholder={"Enter password..."}
                         />
                     </div>
                     <PzButtonBar
