@@ -52,6 +52,7 @@ export default function useDrawCanvas() {
 
     return {
         drawBackground,
-        drawMainSection
+        drawMainSection,
+        drawGrid
     }
 }

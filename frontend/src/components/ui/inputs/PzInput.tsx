@@ -8,6 +8,8 @@ export type PzInputProps = {
     onChange?: (value: string) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     label?: string;
+    labelLeft?: number;
+    labelWidth?: number;
     placeholder?: string;
 } & HtmlElement
 
@@ -21,15 +23,25 @@ export default function PzInput(props: PzInputProps) {
         width,
         height,
         placeholder,
-        label
+        label,
+        labelLeft,
+        labelWidth
     } = props;
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <div>
-            <label>
-                {label ?? "LABEL"}
+            <label style={{
+                position: "absolute",
+                color: "black",
+                fontWeight: "600",
+                top: top,
+                left: labelLeft ?? 0,
+                width: labelWidth ?? 50,
+                height: 20
+            }}>
+                {label ?? ""}
             </label>
             <input
                 ref={inputRef}

@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useState, useEffect, useContext, type SetStateAction } from "react";
-import { useAccountApi, type CreateAccountRequest, } from "../api/account";
+import { useAccountApi, type CreateAccountRequest, } from "../api/useAccountApi";
 import type { AccountDto } from "../types/AccountDto";
 
 

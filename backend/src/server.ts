@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { Pool } from "pg";
 import accountRoutes from "./routes/accounts.routes";
+import authRoutes from "./routes/auth.routes";
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 3000);
@@ -22,6 +23,7 @@ app.get("/api/hello", (req: Request, res: Response) => {
 });
 
 app.use("/api/accounts", accountRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Backend listening on http://localhost:${PORT}`);

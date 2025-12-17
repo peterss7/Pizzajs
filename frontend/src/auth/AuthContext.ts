@@ -2,7 +2,7 @@ import { createContext } from "react";
 import type { AccountDto } from "../types/AccountDto";
 
 export type LoginRequest = {
-    email: string;
+    username: string;
     password: string;
 }
 

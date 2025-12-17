@@ -1,15 +1,19 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "../../auth/AuthProvider";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Login from "./pages/Login";
+import { AuthProvider } from "../../auth/AuthProvider";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
