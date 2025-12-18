@@ -6,14 +6,10 @@ import { AuthProvider } from "../../auth/AuthProvider";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
   );
 }

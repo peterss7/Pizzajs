@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import { pool } from "../db/db";
-import { PassThrough } from "node:stream";
 import { hashPassword } from "../utils/cryptUtils";
 
 type Account = {

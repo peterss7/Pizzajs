@@ -20,12 +20,12 @@ else {
 }
 
 # Install runtime deps
-Write-Host "Installing runtime dependencies (express, cors, pg, dotenv, bcrypt)..." -ForegroundColor Cyan
+Write-Host "Installing runtime dependencies (express, cors, pg, dotenv, bcrypt, cookieParser)..." -ForegroundColor Cyan
 npm install express cors pg dotenv bcrypt
 
 # Install dev deps
 Write-Host "Installing dev dependencies (TypeScript + @types)..." -ForegroundColor Cyan
-npm install -D typescript ts-node-dev cross-env-shell @types/node @types/express @types/cors @types/pg
+npm install -D typescript ts-node-dev cross-env-shell @types/node @types/express @types/cors @types/pg @types/cookie-parser @types/bcrypt
 
 
 # Create tsconfig.json if missing

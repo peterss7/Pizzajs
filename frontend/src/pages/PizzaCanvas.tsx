@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import AccountCreateForm from "../features/accounts/AccountCreateForm";
 import useDrawAccounts from "../hooks/useDrawAccountCreateForm";
 import useDrawCanvas from "../hooks/useDrawCanvas";
 import { useAccountContext } from "../stores/useAccountContext";
-import PzButton from "../components/ui/buttons/PzButton";
 
 
 export default function PizzaCanvas() {
