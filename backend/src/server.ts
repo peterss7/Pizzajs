@@ -3,12 +3,13 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { Pool } from "pg";
 import accountRoutes from "./routes/accounts.routes";
-import authRoutes from "./routes/auth.routes";
 import cookieParser from "cookie-parser";
+import { authRouter } from "./routes/auth.routes";
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 3000);
 const HOST = process.env.HOST ?? "localhost";
+const CORS_ORIGIN = process.env.CORS_ORIGIN;
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {
@@ -18,14 +19,19 @@ if (!connectionString) {
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    origin: CORS_ORIGIN,
+    credentials: true,
+  })
+);
 
-app.get("/api/hello", (req: Request, res: Response) => {
+app.get("/hello", (req: Request, res: Response) => {
   res.json({ message: "Hello from backend!", time: new Date().toISOString() });
 });
 
-app.use("/api/accounts", accountRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/accounts", accountRoutes);
+app.use("/auth", authRouter);
 
 app.listen(PORT, () => {
   console.log(`Backend listening on http://${HOST}:${PORT}`);

@@ -1,11 +1,12 @@
-import type { LoginRequest } from "../auth/AuthContext";
+import type { LoginRequest, SignupRequest } from "../auth/AuthContext";
 import type { AccountDto } from "../types/AccountDto";
+import type { User } from "../types/User";
 import { api } from "./http";
 
 
 export default function useAuthApi() {
 
-  function login(body: LoginRequest) {
+  function loginApi(body: LoginRequest) {
     return api<boolean>("/auth/", {
       method: "GET",
       body: JSON.stringify(body),
@@ -16,11 +17,19 @@ export default function useAuthApi() {
     return api<AccountDto>("/auth/me", { method: "GET" });
   }
 
-  function logout() {
+  function logoutApi() {
     return api<{ message: string }>("/auth/logout", { method: "POST" });
   }
 
+  function signupApi(body: SignupRequest) {
+    return api<User>("/auth/signup",
+      { 
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+  }
+
   return {
-    logout, meApi, login
+    logoutApi, meApi, loginApi, signupApi
   }
 }

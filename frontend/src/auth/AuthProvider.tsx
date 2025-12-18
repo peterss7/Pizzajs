@@ -1,7 +1,7 @@
 import { type ReactNode, useState, useEffect, useMemo } from "react";
-import type { AccountDto } from "../types/AccountDto";
-import { AuthContext, type AuthContextValue, type LoginRequest } from "./AuthContext";
+import { AuthContext, type AuthContextValue, type LoginRequest, type SignupRequest } from "./AuthContext";
 import useAuthApi from "../api/useAuthApi";
+import type { User } from "../types/User";
 
 type Props = {
     children: ReactNode;
@@ -12,8 +12,8 @@ export function AuthProvider({
     children
 }: Props) {
 
-    const {meApi} = useAuthApi();
-    const [currentUser, setCurrentUser] = useState<AccountDto | null>(null);
+    const { meApi, signupApi } = useAuthApi();
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     async function refreshMe() {
@@ -28,12 +28,10 @@ export function AuthProvider({
 
     async function login(req: LoginRequest) {
         console.log("Logging in...");
-        console.log(`user: ${req.username}, pw: ${req.password}`);
-      
+        console.log(`user: ${req.email}, pw: ${req.password}`);
+
 
     }
-
-
 
     async function logout() {
         try {
@@ -41,6 +39,11 @@ export function AuthProvider({
         } finally {
             setCurrentUser(null);
         }
+    }
+
+    async function signup(req: SignupRequest) {
+        const user = await signupApi(req)
+        setCurrentUser(user);
     }
 
     useEffect(() => {
@@ -56,6 +59,7 @@ export function AuthProvider({
         return {
             login,
             logout,
+            signup,
             refreshMe,
             isLoading,
             currentUser,

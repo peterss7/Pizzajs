@@ -1,6 +1,6 @@
 
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}${path}`, {
+  const res = await fetch(`http://localhost:3000${path}`, {
     ...options,
     credentials: "include", // <-- key for cookies
     headers: {

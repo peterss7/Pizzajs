@@ -1,17 +1,20 @@
 import { createContext } from "react";
-import type { AccountDto } from "../types/AccountDto";
+import type { User } from "../types/User";
 
 export type LoginRequest = {
-    username: string;
+    email: string;
     password: string;
 }
 
+export type SignupRequest = LoginRequest;
+
 export type AuthContextValue = {
-    currentUser: AccountDto | null;
+    currentUser: User | null;
     isAuthenticated: boolean;
     isLoading: boolean;
     login: (req: LoginRequest) => Promise<void>;
     logout: () => Promise<void>;
+    signup: (req: SignupRequest) => Promise<void>;
     refreshMe: () => Promise<void>;
 }
 

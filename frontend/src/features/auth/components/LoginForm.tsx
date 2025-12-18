@@ -1,5 +1,6 @@
 import PzInput from "../../../components/ui/inputs/PzInput";
 import PzButtonBar from "../../../components/ui/buttons/PzButtonBar";
+import { Link } from "react-router-dom";
 
 type Props = {
     width: number;
@@ -34,18 +35,18 @@ export default function LoginForm(props: Props) {
         }}>
             <PzInput
                 value={usernameValue ?? ""}
-                label="Username:"
+                label="Email"
                 labelLeft={left + widthUnit * .6}
                 onChange={(value: string) => setUsernameValue(value)}
                 left={left + widthUnit * 2.8}
                 top={top + heightUnit * 2}
                 width={widthUnit * 6}
                 height={15}
-                placeholder={"Enter username..."}
+                placeholder={"Enter email..."}
             />
             <PzInput
                 value={passwordValue ?? ""}
-                label="Password:"
+                label="Password"
                 labelLeft={left + widthUnit * .6}
                 onChange={(value: string) => setPasswordValue(value)}
                 left={left + widthUnit * 2.8}
@@ -57,13 +58,22 @@ export default function LoginForm(props: Props) {
             <PzButtonBar
                 buttonsProps={[
                     {
-                        left: (left + widthUnit * 4),
-                        top: (top + heightUnit * 7),
+                        left: (left + widthUnit * 4.5),
+                        top: (top + heightUnit * 6.25),
                         value: "Sign In",
                         onClick: onLogin
                     }
                 ]}
             />
+            <div style={{ 
+                position: "absolute", 
+                left: left + widthUnit * 4.4, 
+                top: top + heightUnit * 8.5 
+            }}>
+                <Link to="/signup" style={{ textDecoration: "underline" }}>
+                    Register
+                </Link>
+            </div>
         </div>
     )
 }

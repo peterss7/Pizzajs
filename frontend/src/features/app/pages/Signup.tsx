@@ -1,33 +1,48 @@
 import { useEffect, useRef, useState } from "react";
+import { CANVAS_BG_SRC } from "../../../constants/CANVAS_CONSTANTS";
+import useDrawCanvas from "../../../hooks/useDrawCanvas";
 import { useSprite } from "../../../hooks/useSprite";
 import { Canvas } from "../../../styles/CanvasStyles";
-import { CANVAS_BG_SRC } from "../../../constants/CANVAS_CONSTANTS";
-import LoginForm from "../../auth/components/LoginForm";
-import useDrawCanvas from "../../../hooks/useDrawCanvas";
+import SignupForm from "../../auth/components/SignupForm";
 import { useAuth } from "../../../auth/useAuth";
+import { useNavigate } from "react-router-dom";
 
-
-export default function Login() {
+export default function Signup() {
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [height, setHeight] = useState<number>(window.innerHeight);
 
-    const [usernameValue, setUsernameValue] = useState<string>("");
-    const [passwordValue, setPasswordValue] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+    const { signup } = useAuth();
+    const navigate = useNavigate();
 
     const cellWidth = width / 10;
     const cellHeight = height / 10;
+
     const formLeft = cellWidth * 3.5;
     const formTop = cellHeight * 2;
     const formWidth = cellWidth * 3
     const formHeight = cellHeight * 3;
 
-    const { login } = useAuth();
     const bgImage = useSprite(CANVAS_BG_SRC);
     const { drawGrid } = useDrawCanvas();
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    function onLogin() {
-        login({ email: usernameValue, password: passwordValue });
+    async function onSubmit() {
+        setError(null);
+        setIsSubmitting(true);
+
+        try {
+            signup({ email: email, password: password });
+            navigate("/home", {replace: true});
+        } catch (err: any) {
+            setError(err?.message ?? "Signup failed");
+        } finally{
+            setIsSubmitting(false);
+        }
     }
 
     // handle resize
@@ -71,16 +86,22 @@ export default function Login() {
     return (
         <div>
             <Canvas ref={canvasRef} />
-            <LoginForm
-                onLogin={onLogin}
+            <h1 style={{
+                color: "white",
+                position: "absolute",
+                left: cellWidth * 4.25,
+                top: cellHeight * .75
+            }}>Signup</h1>
+            <SignupForm
                 top={formTop}
                 left={formLeft}
                 width={formWidth}
                 height={formHeight}
-                usernameValue={usernameValue}
-                passwordValue={passwordValue}
-                setUsernameValue={setUsernameValue}
-                setPasswordValue={setPasswordValue}
+                email={email}
+                password={password}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                onSubmit={onSubmit}
             />
         </div>
     );

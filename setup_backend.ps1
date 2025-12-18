@@ -21,7 +21,7 @@ else {
 
 # Install runtime deps
 Write-Host "Installing runtime dependencies (express, cors, pg, dotenv, bcrypt, cookieParser)..." -ForegroundColor Cyan
-npm install express cors pg dotenv bcrypt
+npm install express cors pg dotenv argon2
 
 # Install dev deps
 Write-Host "Installing dev dependencies (TypeScript + @types)..." -ForegroundColor Cyan
